@@ -119,13 +119,13 @@ namespace Clarius.TransformOnBuild.MSBuild.Task
             {
                 if (args.Data == null)
                     return;
-                Log.LogMessageFromText(args.Data, MessageImportance.Normal);
+                Log.LogMessageFromText(args.Data, MessageImportance.High);
             };
             process.OutputDataReceived += (sender, args) =>
             {
                 if (args.Data == null)
                     return;
-                Log.LogMessageFromText(args.Data, MessageImportance.Low);
+                Log.LogMessageFromText(args.Data, MessageImportance.High);
             };
             process.Start();
             process.BeginErrorReadLine();
@@ -147,6 +147,10 @@ namespace Clarius.TransformOnBuild.MSBuild.Task
             var textTransformPathCandidates = new[]
             {
                 GetPropertyValue("TextTransformPath"),
+                $@"{_programFiles}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\TextTransform.exe",
+                $@"{_programFiles}\Microsoft Visual Studio\2019\Professional\Common7\IDE\TextTransform.exe",
+                $@"{_programFiles}\Microsoft Visual Studio\2019\Community\Common7\IDE\TextTransform.exe",
+                $@"{_programFiles}\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\TextTransform.exe",
                 $@"{_programFiles}\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\TextTransform.exe",
                 $@"{_programFiles}\Microsoft Visual Studio\2017\Professional\Common7\IDE\TextTransform.exe",
                 $@"{_programFiles}\Microsoft Visual Studio\2017\Community\Common7\IDE\TextTransform.exe",
